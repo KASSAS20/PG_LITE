@@ -128,6 +128,17 @@ def switch_box(root, color, color_box, location_size, event, check):
     height = location_size[3]
 
     pg.draw.rect(root, color, location_size)
+    coordinat = coordinat_rect(x, y, x + width, y + height)
+    action = event.type
+    if action == pg.MOUSEBUTTONDOWN:
+        if event.button == 1:
+            position = event.pos
+            if position in coordinat:
+                check = not check
+    if check == False:
+        pg.draw.rect(root, color_box, (x+height//20, y+height//20, width//2.1, height-height//10))
+    elif check == True:
+        pg.draw.rect(root, color_box, (x+width//2, y+height//20, width//2.1, height-height//10))
 
     return check
 

@@ -1,5 +1,5 @@
 import pygame as pg
-from pg_lite import switch, button, check_box, vertical_switch, on_off
+from pg_lite import switch, button, check_box, vertical_switch, on_off, switch_box
 
 
 root = pg.display.set_mode((500, 500))
@@ -15,6 +15,7 @@ while True:
             but_2 = False
             but_4 = False
             but_5 = False
+            but_6 = False
         but = switch(root, (255, 0, 0), (0, 0, 0),
                      (0, 0, 70, 40), event, check=but)
         but_2 = vertical_switch(root, (255, 0, 0), (0, 0, 0),
@@ -24,7 +25,7 @@ while True:
                           (80, 50, 70, 40), event, check=but_4)
         but_5 = on_off(root, (255, 0, 0), (50, 0, 0), False,
                        False, (0, 200, 70, 40), event, but_5)
-
+        but_6 = switch_box(root, (255,0,0), (0,0,0), (300, 0, 70,40), event, but_6)
         if action == pg.QUIT:
             pg.quit()
             exit()
@@ -38,4 +39,6 @@ while True:
             print('press 4')
         if but_5:
             print('press on/off')
+        if but_6:
+            print('press switch_box')
     pg.display.flip()

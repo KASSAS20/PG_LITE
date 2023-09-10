@@ -63,6 +63,10 @@ def switch(root, color, color_circle, location_size, event, check):
         message_error(6)
     elif not isinstance(check, bool):
         message_error(10)
+    elif not isinstance(color_circle, tuple):
+        message_error(21)
+    elif len(color_circle) != 3:
+        message_error(22)
 
     x = location_size[0]
     y = location_size[1]
@@ -96,6 +100,35 @@ def switch(root, color, color_circle, location_size, event, check):
     if check == True:
         switch_circle_2 = pg.draw.circle(
             root, color_circle, (x + height // 2 + width, y + height // 2), height // 2.22)
+    return check
+
+def switch_box(root, color, color_box, location_size, event, check):
+    if not isinstance(root, pg.surface.Surface):
+        message_error(1)
+    elif not isinstance(color, tuple):
+        message_error(2)
+    elif len(color) != 3:
+        message_error(3)
+    elif not isinstance(location_size, tuple):
+        message_error(4)
+    elif len(location_size) != 4:
+        message_error(5)
+    elif not isinstance(event, pg.event.Event):
+        message_error(6)
+    elif not isinstance(check, bool):
+        message_error(10)
+    elif not isinstance(color_box, tuple):
+        message_error(23)
+    elif len(color_box) != 3:
+        message_error(24)
+
+    x = location_size[0]
+    y = location_size[1]
+    width = location_size[2]
+    height = location_size[3]
+
+    pg.draw.rect(root, color, location_size)
+
     return check
 
 

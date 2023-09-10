@@ -42,6 +42,15 @@ def message_error(num):
         message = 'the color_text_off of the button should be transmitted as a tuple'
     elif num == 20:
         message = 'the color_text_off must be transmitted in RGB format'
+    elif num == 21:
+        message = 'the color_circle of the button should be transmitted as a tuple'
+    elif num == 22:
+        message = 'the color_ciecle must be transmitted in RGB format'
+    elif num == 23:
+        message = 'the color_box of the button should be transmitted as a tuple'
+    elif num == 24:
+        message = 'the color_box must be transmitted in RGB format'
+        
     print(f'\nEROOR {num} : {message}\n')
     pg.quit()
     exit()

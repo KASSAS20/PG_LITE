@@ -99,6 +99,58 @@ def switch(root, color, color_circle, location_size, event, check):
     return check
 
 
+def vertical_switch(root, color, color_circle, location_size, event, check):
+    if not isinstance(root, pg.surface.Surface):
+        message_error(1)
+    elif not isinstance(color, tuple):
+        message_error(2)
+    elif len(color) != 3:
+        message_error(3)
+    elif not isinstance(location_size, tuple):
+        message_error(4)
+    elif len(location_size) != 4:
+        message_error(5)
+    elif not isinstance(event, pg.event.Event):
+        message_error(6)
+    elif not isinstance(check, bool):
+        message_error(10)
+
+    x = location_size[0]
+    y = location_size[1]
+    width = location_size[2]//2
+    height = location_size[3]
+
+    pg.draw.circle(
+        root, color, (x+width//2, y + height // 2), width//2)
+    pg.draw.rect(root, color, (x, y+height//2, width, height))
+    pg.draw.circle(
+        root, color, (x + width // 2, y + height*1.5), width//2)
+
+    switch_coordinate_1 = coordinat_circle(
+        width//2, x+width//2, y + height // 2)
+    switch_coordinate_2 = coordinat_rect(x, y+height//2, width, height)
+    switch_coordinate_3 = coordinat_circle(
+        width//2, x + width // 2, y + height*1.5)
+    switch_coordinate_full = list(
+        set(switch_coordinate_1 + switch_coordinate_2 + switch_coordinate_3))
+
+    action = event.type
+
+    if action == pg.MOUSEBUTTONDOWN:
+        if event.button == 1:
+            position = event.pos
+            if position in switch_coordinate_full:
+                check = not check
+    if check == False:
+        pg.draw.circle(
+            root, color_circle, (x+width//2, y + height // 2), width // 2.22)
+    if check == True:
+        pg.draw.circle(
+            root, color_circle, (x + width // 2, y + height+height//2), width // 2.22)
+
+    return check
+
+
 def check_box(root, color, color_box, location_size, event, check):
 
     if not isinstance(root, pg.surface.Surface):

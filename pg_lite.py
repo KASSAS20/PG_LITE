@@ -196,3 +196,81 @@ def check_box(root, color, color_box, location_size, event, check):
                 check = not check
 
     return check
+
+
+def on_off(root, color_on, color_off, color_text_on, color_text_off, location_size, event, check, text_on='ON', text_off='OFF', text_font='notosansmonocjkjp', text_size=10):
+    if not isinstance(root, pg.surface.Surface):
+        message_error(1)
+    elif not isinstance(location_size, tuple):
+        message_error(4)
+    elif len(location_size) != 4:
+        message_error(5)
+    elif not isinstance(event, pg.event.Event):
+        message_error(6)
+    elif not isinstance(check, bool):
+        message_error(10)
+    elif not isinstance(color_on, tuple):
+        message_error(13)
+    elif len(color_on) != 3:
+        message_error(14)
+    elif not isinstance(color_off, tuple):
+        message_error(15)
+    elif len(color_off) != 3:
+        message_error(16)
+    elif not isinstance(color_text_on, tuple) and not isinstance(color_text_on, bool):
+        message_error(17)
+    elif not isinstance(color_text_on, bool):
+        if len(color_text_on) != 3:
+            message_error(18)
+    elif not isinstance(color_text_off, tuple) and not isinstance(color_text_on, bool):
+        message_error(19)
+    elif not isinstance(color_text_off, bool):
+        if len(color_text_off) != 3:
+            message_error(20)
+
+    x_1 = location_size[0]
+    y = location_size[1]
+    width = location_size[2]//2
+    height = location_size[3]
+    x_2 = location_size[0] + width
+
+    coordinat = coordinat_rect(x_1, y, x_1+width*2, y+height)
+
+    action = event.type
+
+    if action == pg.MOUSEBUTTONDOWN:
+        if event.button == 1:
+            position = event.pos
+            if position in coordinat:
+                check = not check
+
+    if check == False:
+        btn_1 = pg.draw.rect(root, color_on, (x_1, y, width, height))
+        btn_2 = pg.draw.rect(root, color_off, (x_2, y, width, height))
+    if check == True:
+        btn_1 = pg.draw.rect(root, color_off, (x_1, y, width, height))
+        btn_2 = pg.draw.rect(root, color_on, (x_2, y, width, height))
+
+    if text_on != False or text_off != False:
+        text_on = str(text_on)
+        text_off = str(text_off)
+        if color_text_on == False:
+            if check == True:
+                color_text_on = color_on
+            else:
+                color_text_on = color_off
+        if color_text_off == False:
+            if check == True:
+                color_text_off = color_off
+            else:
+                color_text_off = color_on
+
+        font = pg.font.SysFont(text_font, text_size)
+        button_text = font.render(text_on, True, color_text_on)
+        button_text_2 = font.render(text_off, True, color_text_off)
+        but_center = button_text.get_rect(center=btn_1.center)
+        but_2_center = button_text.get_rect(center=btn_2.center)
+        root.blit(button_text, (but_center))
+        root.blit(button_text_2, (but_2_center))
+
+    return check

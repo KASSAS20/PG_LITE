@@ -13,19 +13,37 @@ while True:
             but = False
             but_2 = False
             but_2 = False
+            but_3 = False
             but_4 = False
             but_5 = False
             but_6 = False
-        but = switch(root, (255, 0, 0), (0, 0, 0),
-                     (0, 0, 70, 40), event, check=but)
-        but_2 = vertical_switch(root, (255, 0, 0), (0, 0, 0),
-                                (5, 50, 70, 40), event, check=but_2)
-        but_3 = button(root, (255, 0, 0), (80, 5, 70, 40), event, text='3')
-        but_4 = check_box(root, (255, 0, 0), (0, 0, 0),
-                          (80, 50, 70, 40), event, check=but_4)
-        but_5 = on_off(root, (255, 0, 0), (50, 0, 0), False,
-                       False, (0, 200, 70, 40), event, but_5)
-        but_6 = switch_box(root, (255,0,0), (0,0,0), (300, 0, 70,40), event, but_6)
+        but = switch(root=root,
+                     event=event,
+                     location_size=(0,0, 40, 20),
+                     color=(255,0,0),
+                     check=but)
+        but_2 = vertical_switch(root=root,
+                                event=event,
+                                location_size=(0, 400, 30, 60),
+                                check=but_2)
+        
+        but_3 = button(root=root,
+                       event = event,
+                       location_size=(100,0,30,30),
+                       color=(255,0,0),
+                       text = 'SAS')
+        but_4 = check_box(root=root,
+                          event=event,
+                          location_size=(400, 300, 50,50), 
+                          check=but_4)
+        but_5 = on_off(root=root,
+                       event=event,
+                       location_size=(70, 200, 60, 30),
+                       check = but_5)
+        but_6 = switch_box(root=root,
+                           event=event,
+                           location_size=(300, 200, 50,50),
+                           check= but_6)
         if action == pg.QUIT:
             pg.quit()
             exit()
